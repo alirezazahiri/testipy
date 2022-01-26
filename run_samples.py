@@ -1,5 +1,5 @@
 from COLORS import *
-from constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT
+from constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
 import subprocess as sb
 import os
 import shutil
@@ -9,7 +9,7 @@ sys.path.append(".")
 """ RUN ANY .cpp FILE INSIDE THIS DIRECTORY """
 try:
     print(f"{WARNING}{BOLD}COMPILING...{ENDC}")
-    sb.call("g++ *.cpp", shell=True)
+    sb.call(f"g++ {TARGET_ROOT}/*.cpp", shell=True)
 except:
     print(f"{FAIL}{BOLD}COMPILATION ERROR...{ENDC}")
     exit(0)
@@ -34,13 +34,18 @@ sb.call("py file_gen.py", shell=True)
 
 """ RUN THE .exe FILE, GET I/O FROM SPECIFIED FILES """
 for i in range(NUM_OF_TESTS):
+    sb.call("cd target", shell=True)
     sb.call(
         f"a.exe < {IN_FILE_ROOT}/in-{i+1}.txt > {RESULT_FILE_ROOT}/result-{i+1}.txt", shell=True)
+    sb.call("cd ..", shell=True)
+os.remove("a.exe")
 
 """ CHECK IF EXPECTED RESULT IS EQUAL WITH CLIENT'S ANSWER """
 for i in range(NUM_OF_TESTS):
+    """ JUDGE CODE OUTPUT """
     expected_answer = [line.strip() for line in open(
         f"{OUT_FILE_ROOT}/out-{i+1}.txt", 'r').readlines()]
+    """ CLIENT CODE OUTPUT """
     got_answer = [line.strip() for line in open(
         f"{RESULT_FILE_ROOT}/result-{i+1}.txt", 'r').readlines()]
 

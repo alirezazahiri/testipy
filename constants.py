@@ -4,5 +4,8 @@ OUT_FILE_ROOT = "./test/out"
 RESULT_FILE_ROOT = "./test/result"
 TEST_ROOT = "./test"
 
+""" CPP TARGET PATH """
+TARGET_ROOT = "./target"
+
 """ NUMBER OF AUTOMATED TESTS YOU WANT TO RUN """
 NUM_OF_TESTS = 20
