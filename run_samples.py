@@ -1,10 +1,9 @@
-from constants.COLORS import *
-from constants.constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
 import subprocess as sb
 import os
 import shutil
-import sys
-sys.path.append(".")
+from settings.file_gen import run
+from constants.COLORS import *
+from constants.settings import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
 
 """ RUN ANY .cpp FILE INSIDE THIS DIRECTORY """
 try:
@@ -30,7 +29,7 @@ except:
     os.mkdir(f"{OUT_FILE_ROOT}")
 
 """ GENERATE FILES FOR TESTS I/O """
-sb.call("py file_gen.py", shell=True)
+run()
 
 """ RUN THE .exe FILE, GET I/O FROM SPECIFIED FILES """
 for i in range(NUM_OF_TESTS):

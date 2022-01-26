@@ -1,8 +1,6 @@
-from io_tst import main_code
+from sample.io_tst import main_code
 from constants.COLORS import *
-from constants.constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT
-import sys
-sys.path.append(".")
+from constants.settings import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT
 
 
 def generate(filename: str, rootPath: str = "", content: str = ""):
@@ -23,4 +21,6 @@ def create_files(count: int, extension: str):
                  rootPath=OUT_FILE_ROOT, content=result)
 
 
-create_files(NUM_OF_TESTS, "txt")
+
+def run():
+    create_files(NUM_OF_TESTS, "txt")
