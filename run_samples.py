@@ -1,14 +1,18 @@
-import subprocess as sb
-import os 
-import shutil
-import sys 
-sys.path.append(".")
-from constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT
 from COLORS import *
+from constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT
+import subprocess as sb
+import os
+import shutil
+import sys
+sys.path.append(".")
 
 """ RUN ANY .cpp FILE INSIDE THIS DIRECTORY """
-print(f"{OKBLUE}COMPILING .cpp CODE...{ENDC}")
-sb.call("g++ *.cpp", shell=True)
+print(f"{WARNING}COMPILING .cpp CODE...{ENDC}")
+try:
+    sb.call("g++ *.cpp", shell=True)
+except:
+    print(f"{FAIL}{BOLD}COMPILATION ERROR...{ENDC}")
+    exit(0)
 
 try:
     """ CREATE ALL DIRECTORIES NEEDED FOR TEST """
@@ -17,19 +21,23 @@ try:
     os.mkdir(f"{IN_FILE_ROOT}")
     os.mkdir(f"{OUT_FILE_ROOT}")
 except:
-    pass
+    print(f"{FAIL}{BOLD}FAILED TO CREATE SPECIFIED DIRECTORIES...{ENDC}")
+    exit(0)
 
 """ GENERATE FILES FOR TESTS I/O """
 sb.call("py file_gen.py", shell=True)
 
 """ RUN THE .exe FILE, GET I/O FROM SPECIFIED FILES """
 for i in range(NUM_OF_TESTS):
-    sb.call(f"a.exe < {IN_FILE_ROOT}/in-{i+1}.txt > {RESULT_FILE_ROOT}/result-{i+1}.txt", shell=True)
+    sb.call(
+        f"a.exe < {IN_FILE_ROOT}/in-{i+1}.txt > {RESULT_FILE_ROOT}/result-{i+1}.txt", shell=True)
 
 """ CHECK IF EXPECTED RESULT IS EQUAL WITH CLIENT'S ANSWER """
 for i in range(NUM_OF_TESTS):
-    expected_answer = [line.strip() for line in open(f"{OUT_FILE_ROOT}/out-{i+1}.txt", 'r').readlines()]
-    got_answer = [line.strip() for line in open(f"{RESULT_FILE_ROOT}/result-{i+1}.txt", 'r').readlines()]
+    expected_answer = [line.strip() for line in open(
+        f"{OUT_FILE_ROOT}/out-{i+1}.txt", 'r').readlines()]
+    got_answer = [line.strip() for line in open(
+        f"{RESULT_FILE_ROOT}/result-{i+1}.txt", 'r').readlines()]
 
     test_result = True
 
@@ -38,7 +46,7 @@ for i in range(NUM_OF_TESTS):
         if line.strip().strip("\n") != got_answer[index].strip().strip("\n"):
             test_result = False
             break
-    
+
     if test_result:
         print(f"{OKGREEN}TEST {i+1} PASSED, SUCCESSFULLY{ENDC}")
     else:
