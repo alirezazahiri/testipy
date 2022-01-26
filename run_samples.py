@@ -7,8 +7,8 @@ import sys
 sys.path.append(".")
 
 """ RUN ANY .cpp FILE INSIDE THIS DIRECTORY """
-print(f"{WARNING}COMPILING .cpp CODE...{ENDC}")
 try:
+    print(f"{WARNING}{BOLD}COMPILING...{ENDC}")
     sb.call("g++ *.cpp", shell=True)
 except:
     print(f"{FAIL}{BOLD}COMPILATION ERROR...{ENDC}")
@@ -22,7 +22,12 @@ try:
     os.mkdir(f"{OUT_FILE_ROOT}")
 except:
     print(f"{FAIL}{BOLD}FAILED TO CREATE SPECIFIED DIRECTORIES...{ENDC}")
-    exit(0)
+    print(f"{WARNING}{BOLD}RETRYING...{ENDC}")
+    shutil.rmtree(f"{TEST_ROOT}")
+    os.mkdir(f"{TEST_ROOT}")
+    os.mkdir(f"{RESULT_FILE_ROOT}")
+    os.mkdir(f"{IN_FILE_ROOT}")
+    os.mkdir(f"{OUT_FILE_ROOT}")
 
 """ GENERATE FILES FOR TESTS I/O """
 sb.call("py file_gen.py", shell=True)

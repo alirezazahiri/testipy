@@ -1,32 +1,38 @@
+import string 
+import random 
 """ WRITE YOUR OWN CORRECT CODE TO TEST THE OUTPUT """
-
-import random
-
 
 def to_str(num: int):
     return f"{num}\n"
 
+def random_case_string(s: str):
+    res = ''
+    for letter in s:
+        choice = random.randint(1, 3)
+        if choice == 1:
+            res += letter.lower()
+        elif choice == 2:
+            res += letter.lower()
+        else:
+            res += random.choice(string.ascii_uppercase)
+    return res 
 
-def is_prime(num: int):
-    if num < 2:
-        return False
-    if num == 2:
-        return True
-    if num % 2 == 0:
-        return False
-    for i in range(3, num // 2):
-        if num % i == 0:
-            return False
-    return True
-
+def generate_random_string(length: int):
+    s = ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))  
+    random_cased = random_case_string(s)
+    return s, random_cased
 
 def main_code():
     """ RETURN THE I/O THAT IS COMPATIBLE WITH YOUR TEST """
-    n = random.randint(1, 1000)
-    nums = [random.randint(0, 999999) for _ in range(n)]
-    primes = [num for num in nums if is_prime(num)]
-
-    i = f"{n}\n{' '.join(list(map(str, nums)))}"
-    o = f"{''.join(list(map(to_str, primes)))}"
+    n = random.randint(1, 100000)
+    hero, followed = generate_random_string(n)
+    counter = 0
+    
+    for i, letter in enumerate(hero):
+        if letter != followed[i]:
+            counter += 1
+    
+    i = f"{n}\n{hero}\n{followed}"
+    o = f"{counter}"
 
     return i, o
