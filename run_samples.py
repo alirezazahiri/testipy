@@ -47,7 +47,7 @@ for i in range(NUM_OF_TESTS):
         print(f"{FAIL}\t- GOT: {BOLD}{UNDERLINE}{got_answer}{ENDC}")
 
 """ REMOVE ALL TEST FILES CREATED """
-# try:
-#     shutil.rmtree(f"{TEST_ROOT}")
-# except:
-#     print("NOT FOUND :(")
+try:
+    shutil.rmtree(f"{TEST_ROOT}")
+except:
+    print("NOT FOUND :(")
