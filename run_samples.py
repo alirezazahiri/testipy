@@ -1,5 +1,5 @@
-from COLORS import *
-from constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
+from constants.COLORS import *
+from constants.constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
 import subprocess as sb
 import os
 import shutil

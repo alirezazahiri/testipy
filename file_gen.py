@@ -1,6 +1,6 @@
 from io_tst import main_code
-from COLORS import *
-from constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT
+from constants.COLORS import *
+from constants.constants import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT
 import sys
 sys.path.append(".")
 
