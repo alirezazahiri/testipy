@@ -1,0 +1,8 @@
+""" TEST FILE'S ROOT DIRECTORIES """
+IN_FILE_ROOT = "./test/in"
+OUT_FILE_ROOT = "./test/out"
+RESULT_FILE_ROOT = "./test/result"
+TEST_ROOT = "./test"
+
+""" NUMBER OF AUTOMATED TESTS YOU WANT TO RUN """
+NUM_OF_TESTS = 10
