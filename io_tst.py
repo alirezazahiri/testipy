@@ -3,7 +3,7 @@
 import random
 
 def to_str(num: int):
-    return f"{num}"
+    return f"{num}\n"
 
 def is_prime(num: int):
     if num < 2: return False
@@ -21,6 +21,6 @@ def main_code():
     primes = [num for num in nums if is_prime(num)]
 
     i = f"{n}\n{' '.join(list(map(str, nums)))}"
-    o = f"{' '.join(list(map(to_str, primes)))}"
+    o = f"{''.join(list(map(to_str, primes)))}"
 
     return i, o

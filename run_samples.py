@@ -28,7 +28,7 @@ for i in range(NUM_OF_TESTS):
 
 """ CHECK IF EXPECTED RESULT IS EQUAL WITH CLIENT'S ANSWER """
 for i in range(NUM_OF_TESTS):
-    expected_answer = [line.strip().split() for line in open(f"{OUT_FILE_ROOT}/out-{i+1}.txt", 'r').readlines()][0]
+    expected_answer = [line.strip() for line in open(f"{OUT_FILE_ROOT}/out-{i+1}.txt", 'r').readlines()]
     got_answer = [line.strip() for line in open(f"{RESULT_FILE_ROOT}/result-{i+1}.txt", 'r').readlines()]
 
     test_result = True
@@ -47,7 +47,7 @@ for i in range(NUM_OF_TESTS):
         print(f"{FAIL}\t- GOT: {BOLD}{UNDERLINE}{got_answer}{ENDC}")
 
 """ REMOVE ALL TEST FILES CREATED """
-try:
-    shutil.rmtree(f"{TEST_ROOT}")
-except:
-    print("NOT FOUND :(")
+# try:
+#     shutil.rmtree(f"{TEST_ROOT}")
+# except:
+#     print("NOT FOUND :(")
