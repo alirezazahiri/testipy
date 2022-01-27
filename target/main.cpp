@@ -1,18 +1,21 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int fact(int n) {
-	if(n == 2 || n == 1) return n;
-	if(n == 0) return 1;
-	return n * fact(n-1);
-}
 
 int main() {
+	
 	int n;
 	cin >> n;
-	
-	cout << fact(n);
+
+	char a[n], b[n];
+	int counter = 0;
+	for (int i = 0; i < n; i++) cin >> a[i];
+	for (int i = 0; i < n; i++) {
+		cin >> b[i];
+		if (a[i] != b[i]) counter++;
+	}
+	cout << counter;
 	
 	return 0;
 }

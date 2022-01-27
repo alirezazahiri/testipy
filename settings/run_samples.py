@@ -1,7 +1,7 @@
 import subprocess as sb
 import os
 import shutil
-from settings.file_gen import run
+from settings.file_gen import run_file_gen
 from constants.COLORS import *
 from constants.settings import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
 
@@ -14,7 +14,14 @@ def finish():
         return
 
 
-def execute(FILE: str):
+def make_dirs():
+    os.mkdir(f"{TEST_ROOT}")
+    os.mkdir(f"{RESULT_FILE_ROOT}")
+    os.mkdir(f"{IN_FILE_ROOT}")
+    os.mkdir(f"{OUT_FILE_ROOT}")
+
+
+def execute(FILE: str, input_code_filename: str):
     """ RUN ANY .cpp FILE INSIDE THIS DIRECTORY """
     try:
         print(f"{WARNING}{BOLD}COMPILING...{ENDC}")
@@ -27,19 +34,14 @@ def execute(FILE: str):
     print(f"{WARNING}{BOLD}CREATING SPECIFIED DIRECTORIES...{ENDC}")
     try:
         """ CREATE ALL DIRECTORIES NEEDED FOR TEST """
-        os.mkdir(f"{TEST_ROOT}")
-        os.mkdir(f"{RESULT_FILE_ROOT}")
-        os.mkdir(f"{IN_FILE_ROOT}")
-        os.mkdir(f"{OUT_FILE_ROOT}")
+        make_dirs()
     except:
         shutil.rmtree(f"{TEST_ROOT}")
-        os.mkdir(f"{TEST_ROOT}")
-        os.mkdir(f"{RESULT_FILE_ROOT}")
-        os.mkdir(f"{IN_FILE_ROOT}")
-        os.mkdir(f"{OUT_FILE_ROOT}")
+        make_dirs()
+        
 
     """ GENERATE FILES FOR TESTS I/O """
-    run()
+    run_file_gen()
 
     """ RUN THE .exe FILE, GET I/O FROM SPECIFIED FILES """
     for i in range(NUM_OF_TESTS):
@@ -59,9 +61,12 @@ def execute(FILE: str):
         os.remove("a.exe")
 
     """ CHECK IF EXPECTED RESULT IS EQUAL WITH CLIENT'S ANSWER """
+
+    passed_tests_count = 0
+
     for i in range(NUM_OF_TESTS):
-        """ JUDGE CODE OUTPUT """
         try:
+            """ JUDGE CODE OUTPUT """
             expected_answer = [line.strip() for line in open(
                 f"{OUT_FILE_ROOT}/out-{i+1}.txt", 'r').readlines()]
             """ CLIENT CODE OUTPUT """
@@ -84,7 +89,11 @@ def execute(FILE: str):
 
         if test_result:
             print(f"{OKGREEN}TEST {i+1} PASSED, SUCCESSFULLY{ENDC}")
+            passed_tests_count += 1
         else:
             print(f"{FAIL}TEST {i+1} FAILED{ENDC}")
             print(f"{WARNING}\t- EXPECTED: {BOLD}{UNDERLINE}{expected_answer}{ENDC}")
             print(f"{FAIL}\t- GOT: {BOLD}{UNDERLINE}{got_answer}{ENDC}")
+    
+    print(f"{OKCYAN}{BOLD}PASSED {OKGREEN}{passed_tests_count}{ENDC} {OKCYAN}{BOLD}TESTS OUT OF {WARNING}{NUM_OF_TESTS}{ENDC}")
+    print(f"\t{OKCYAN} SCORE OF {input_code_filename} {WARNING}->{OKBLUE} {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%")
