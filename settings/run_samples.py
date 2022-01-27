@@ -27,9 +27,10 @@ def execute(FILE: str, input_code_filename: str):
         print(f"{WARNING}{BOLD}COMPILING...{ENDC}")
         compilation_response = sb.call(f"g++ {FILE}", shell=True)
         exe_exists = "a.exe" in os.listdir(".")
-        # print({"compilation_response": compilation_response})
+
         if not exe_exists:
-            print(f"{FAIL}{BOLD}COMPILATION ERROR...(CODE: {FAIL}{UNDERLINE}{BOLD}{compilation_response}{ENDC}){ENDC}")
+            print(
+                f"{FAIL}{BOLD}COMPILATION ERROR...(CODE: {FAIL}{UNDERLINE}{BOLD}{compilation_response}{ENDC}){ENDC}")
             finish()
             return "COMPILE FAILED!"
     except:
@@ -44,7 +45,6 @@ def execute(FILE: str, input_code_filename: str):
     except:
         shutil.rmtree(f"{TEST_ROOT}")
         make_dirs()
-        
 
     """ GENERATE FILES FOR TESTS I/O """
     run_file_gen()
@@ -62,7 +62,7 @@ def execute(FILE: str, input_code_filename: str):
             break
     try:
         os.remove("a.exe")
-    except: 
+    except:
         os.system("taskkill /f /im  a.exe")
         os.remove("a.exe")
 
@@ -100,7 +100,7 @@ def execute(FILE: str, input_code_filename: str):
             print(f"{FAIL}TEST {i+1} FAILED{ENDC}")
             print(f"{WARNING}\t- EXPECTED: {BOLD}{UNDERLINE}{expected_answer}{ENDC}")
             print(f"{FAIL}\t- GOT: {BOLD}{UNDERLINE}{got_answer}{ENDC}")
-    
+
     print(f"{OKCYAN}{BOLD}PASSED {OKGREEN}{passed_tests_count}{ENDC} {OKCYAN}{BOLD}TESTS OUT OF {WARNING}{NUM_OF_TESTS}{ENDC}")
     print(f"\t{OKCYAN} SCORE OF {input_code_filename} {WARNING}->{OKBLUE} {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%")
     return f"SCORE OF {input_code_filename} -> {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%"
