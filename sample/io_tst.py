@@ -4,7 +4,7 @@ import random
 
 def main_code():
     """ RETURN THE I/O THAT IS COMPATIBLE WITH YOUR TEST """
-    n = random.randint(1, 20)
+    n = random.randint(1, 10)
     
     i = f"{n}"
     o = f"{math.factorial(n)}"

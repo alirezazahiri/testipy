@@ -25,11 +25,17 @@ def execute(FILE: str, input_code_filename: str):
     """ RUN ANY .cpp FILE INSIDE THIS DIRECTORY """
     try:
         print(f"{WARNING}{BOLD}COMPILING...{ENDC}")
-        sb.call(f"g++ {FILE}", shell=True)
+        compilation_response = sb.call(f"g++ {FILE}", shell=True)
+        exe_exists = "a.exe" in os.listdir(".")
+        # print({"compilation_response": compilation_response})
+        if not exe_exists:
+            print(f"{FAIL}{BOLD}COMPILATION ERROR...(CODE: {FAIL}{UNDERLINE}{BOLD}{compilation_response}{ENDC}){ENDC}")
+            finish()
+            return "COMPILE FAILED!"
     except:
         print(f"{FAIL}{BOLD}COMPILATION ERROR...{ENDC}")
         finish()
-        return
+        return "COMPILE FAILED!"
 
     print(f"{WARNING}{BOLD}CREATING SPECIFIED DIRECTORIES...{ENDC}")
     try:
@@ -97,3 +103,4 @@ def execute(FILE: str, input_code_filename: str):
     
     print(f"{OKCYAN}{BOLD}PASSED {OKGREEN}{passed_tests_count}{ENDC} {OKCYAN}{BOLD}TESTS OUT OF {WARNING}{NUM_OF_TESTS}{ENDC}")
     print(f"\t{OKCYAN} SCORE OF {input_code_filename} {WARNING}->{OKBLUE} {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%")
+    return f"SCORE OF {input_code_filename} -> {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%"
