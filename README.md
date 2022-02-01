@@ -41,4 +41,4 @@
 <hr>
 
 ## Check Coverages
-- finally you can get a brief coverage report for each c++ code, inside [statistics.txt](./statistics.txt)
+- finally you can get a brief coverage report of each code, inside [statistics.csv](./statistics.csv)

@@ -7,7 +7,7 @@ from core.run_samples import execute
 
 files = os.listdir(INPUT_FILES_ROOT)
 with open(SCORE_STATISTICS_FILE, "w") as initialize:
-    print(end='', file=initialize)
+    print(end='file name,coverage\n', file=initialize)
 initialize.close()
 
 for file in files:

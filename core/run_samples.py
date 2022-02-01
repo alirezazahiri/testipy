@@ -103,4 +103,4 @@ def execute(FILE: str, input_code_filename: str):
 
     print(f"{OKCYAN}{BOLD}PASSED {OKGREEN}{passed_tests_count}{ENDC} {OKCYAN}{BOLD}TESTS OUT OF {WARNING}{NUM_OF_TESTS}{ENDC}")
     print(f"\t{OKCYAN} SCORE OF {input_code_filename} {WARNING}->{OKBLUE} {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%")
-    return f"SCORE OF {input_code_filename} -> {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%"
+    return f"{input_code_filename},{round(passed_tests_count*100/NUM_OF_TESTS, 2)}%"

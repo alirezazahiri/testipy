@@ -14,4 +14,4 @@ NUM_OF_TESTS = 20
 INPUT_FILES_ROOT = "./inputs"
 
 """ FILE TO SAVE SCORES FOR EACH FILENAME """
-SCORE_STATISTICS_FILE = "./statistics.txt"
+SCORE_STATISTICS_FILE = "./statistics.csv"
