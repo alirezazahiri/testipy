@@ -4,3 +4,5 @@ test
 test/*
 *.exe
 *.csv
+*.c
+*.cpp
