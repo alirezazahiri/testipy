@@ -9,7 +9,10 @@
 
 ## Insert C++ or C Codes
 
--   you can easily add c++ or c files in [/inputs](./inputs) directory > _there is no need to add **.exe** files in this directory, files are finally getting filtered by .cpp extension while program is on!_
+-   you can easily add c++ or c files in [/inputs](./inputs) directory 
+
+> _there is no need to add **.exe** files in this directory, files are finally getting filtered by .cpp extension while program is on!_
+
 <hr>
 
 ## Add Test Code
