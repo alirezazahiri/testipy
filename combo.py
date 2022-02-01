@@ -2,7 +2,7 @@ import shutil
 import os
 from constants.COLORS import *
 from constants.settings import INPUT_FILES_ROOT, SCORE_STATISTICS_FILE, TARGET_ROOT
-from settings.run_samples import execute
+from core.run_samples import execute
 
 
 files = os.listdir(INPUT_FILES_ROOT)

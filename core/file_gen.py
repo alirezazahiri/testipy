@@ -18,7 +18,7 @@ def create_files(count: int, extension: str):
     for i in range(count):
         content, result = None, None
         if len(io_list) < count:
-            content, result = main_code()
+            content, result = main_code(i)
             io_list.append((content, result))
         else:
             content, result = io_list[i]

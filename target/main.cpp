@@ -1,21 +1,16 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
+#include <stdio.h>
 
 int main() {
 	
 	int n;
-	cin >> n;
+	scanf("%d", &n);
 
-	char a[n], b[n];
-	int counter = 0;
-	for (int i = 0; i < n; i++) cin >> a[i];
-	for (int i = 0; i < n; i++) {
-		cin >> b[i];
-		if (a[i] != b[i]) counter++;
+	int i;
+	int res = 1;
+	for (i = 2; i <= n; i++) {
+		res *= i;
 	}
-	cout << counter;
-	
+	printf("%d", res);
+
 	return 0;
 }

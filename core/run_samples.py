@@ -1,7 +1,7 @@
 import subprocess as sb
 import os
 import shutil
-from settings.file_gen import run_file_gen
+from core.file_gen import run_file_gen
 from constants.COLORS import *
 from constants.settings import IN_FILE_ROOT, NUM_OF_TESTS, OUT_FILE_ROOT, RESULT_FILE_ROOT, TEST_ROOT, TARGET_ROOT
 
