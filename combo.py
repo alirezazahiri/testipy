@@ -11,7 +11,7 @@ with open(SCORE_STATISTICS_FILE, "w") as initialize:
 initialize.close()
 
 for file in files:
-    if file.endswith(".cpp"):
+    if file.split('.')[1] in ['c', 'cpp']:
         print(f"{WARNING}{BOLD}RUNNING TESTS FOR {file}...{ENDC}")
         shutil.copyfile(rf"{INPUT_FILES_ROOT}/{file}",
                         rf"{TARGET_ROOT}/main.cpp")
