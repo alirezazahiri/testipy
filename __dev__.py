@@ -1,4 +1,4 @@
-from sample.io_tst import test_main_code
+from sample.test_dev import test_main_code
 
 
 test_main_code()
