@@ -18,18 +18,20 @@ results = []
 def pre_execute(target_root: str, filename: str):
     results.append(execute(target_root, filename))
 
+
 for index, file in enumerate(files):
     print(f"{WARNING}{BOLD}RUNNING TESTS FOR {file}...{ENDC}")
-    
+
     shutil.copyfile(rf"{INPUT_FILES_ROOT}/{file}",
                     rf"{TARGET_ROOT}/main.cpp")
-    
-    thread = threading.Thread(target=pre_execute(f"{TARGET_ROOT}/main.cpp", file))
+
+    thread = threading.Thread(target=pre_execute(
+        f"{TARGET_ROOT}/main.cpp", file))
     thread.start()
     threads.append(thread)
-    
+
     print(f"{WARNING}{BOLD}FINISHED TESTING PROCESS ON {file}{ENDC}")
-    
+
     with open(SCORE_STATISTICS_FILE, "a") as scores_file:
         print(results[index], file=scores_file)
     scores_file.close()

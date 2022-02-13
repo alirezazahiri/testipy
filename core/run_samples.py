@@ -54,7 +54,7 @@ def execute(FILE: str, input_code_filename: str):
         sb.call("cd target", shell=True)
         try:
             sb.call(
-                f"a.exe < {IN_FILE_ROOT}/in-{i+1}.txt > {RESULT_FILE_ROOT}/result-{i+1}.txt", shell=True, timeout=3.0)
+                f"a.exe < {IN_FILE_ROOT}/in-{i+1}.txt > {RESULT_FILE_ROOT}/result-{i+1}.txt", shell=True, timeout=1.0)
             sb.call("cd ..", shell=True)
         except:
             print(f"{FAIL}{BOLD}RUNTIME ERROR{ENDC}")
