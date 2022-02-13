@@ -43,7 +43,7 @@
     python3 combo.py
     ```
 -   windows
-`sh py combo.py `
+`py combo.py `
 <hr>
 
 ## Check Coverages
