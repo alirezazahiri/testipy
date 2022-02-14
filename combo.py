@@ -4,6 +4,7 @@ from constants.COLORS import *
 from constants.settings import INPUT_FILES_ROOT, SCORE_STATISTICS_FILE, TARGET_ROOT
 from core.run_samples import execute
 import threading
+import subprocess as sb
 
 lock = threading.Lock()
 
@@ -16,6 +17,11 @@ files = [file for file in files if file.split('.')[1] in ['c', 'cpp']]
 threads = []
 results = []
 
+def init():
+    if not "main.cpp" in os.listdir("target"):
+        sb.call("touch target/main.cpp")
+
+init()
 
 def pre_execute(target_root: str, filename: str):
     lock.acquire()
