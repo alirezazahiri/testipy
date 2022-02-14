@@ -1,7 +1,7 @@
 import shutil
 import os
 from constants.COLORS import *
-from constants.settings import INPUT_FILES_ROOT, SCORE_STATISTICS_FILE, TARGET_ROOT
+from constants.settings import INPUT_FILES_ROOT, SCORE_STATISTICS_FILE, TARGET_ROOT, TEST_ROOT
 from core.run_samples import execute
 import threading
 import subprocess as sb
@@ -48,3 +48,13 @@ for index, file in enumerate(files):
 
 for thread in threads:
     thread.join()
+
+def end():
+    print(f"{WARNING}RESTORING CHANGES...{ENDC}")
+    if "a.exe" in os.listdir("."):
+        os.remove("a.exe")
+    try:
+        shutil.rmtree(f"{TEST_ROOT}")
+    except:
+        return
+end()
