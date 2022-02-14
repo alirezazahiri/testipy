@@ -5,6 +5,8 @@ from constants.settings import INPUT_FILES_ROOT, SCORE_STATISTICS_FILE, TARGET_R
 from core.run_samples import execute
 import threading
 
+lock = threading.Lock()
+
 files = os.listdir(INPUT_FILES_ROOT)
 with open(SCORE_STATISTICS_FILE, "w") as initialize:
     print(end='file name,coverage\n', file=initialize)
@@ -16,7 +18,9 @@ results = []
 
 
 def pre_execute(target_root: str, filename: str):
+    lock.acquire()
     results.append(execute(target_root, filename))
+    lock.release()
 
 
 for index, file in enumerate(files):

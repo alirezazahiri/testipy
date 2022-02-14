@@ -10,8 +10,19 @@ def finish():
     """ REMOVE ALL TEST FILES CREATED """
     try:
         shutil.rmtree(f"{TEST_ROOT}")
+        if "a.exe.core" in os.listdir("."):
+            os.remove("a.exe.core")
     except:
         return
+
+
+def kill_exe():
+    """ KILLS AND REMOVES .exe FILE CREATED BY COMPILING """
+    try:
+        os.remove("a.exe")
+    except:
+        os.system("taskkill /f /im  a.exe")
+        os.remove("a.exe")
 
 
 def make_dirs():
@@ -50,6 +61,7 @@ def execute(FILE: str, input_code_filename: str):
     run_file_gen()
 
     """ RUN THE .exe FILE, GET I/O FROM SPECIFIED FILES """
+    dumped = False
     for i in range(NUM_OF_TESTS):
         sb.call("cd target", shell=True)
         try:
@@ -60,11 +72,8 @@ def execute(FILE: str, input_code_filename: str):
             print(f"{FAIL}{BOLD}RUNTIME ERROR{ENDC}")
             finish()
             break
-    try:
-        os.remove("a.exe")
-    except:
-        os.system("taskkill /f /im  a.exe")
-        os.remove("a.exe")
+
+    kill_exe()
 
     """ CHECK IF EXPECTED RESULT IS EQUAL WITH CLIENT'S ANSWER """
 
@@ -103,4 +112,5 @@ def execute(FILE: str, input_code_filename: str):
 
     print(f"{OKCYAN}{BOLD}PASSED {OKGREEN}{passed_tests_count}{ENDC} {OKCYAN}{BOLD}TESTS OUT OF {WARNING}{NUM_OF_TESTS}{ENDC}")
     print(f"\t{OKCYAN} SCORE OF {input_code_filename} {WARNING}->{OKBLUE} {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%")
+    finish()
     return f"{input_code_filename},{round(passed_tests_count*100/NUM_OF_TESTS, 2)}%"
