@@ -106,9 +106,12 @@ def execute(FILE: str, input_code_filename: str):
             print(f"{OKGREEN}TEST {i+1} PASSED, SUCCESSFULLY{ENDC}")
             passed_tests_count += 1
         else:
+            if len(expected_answer) < 3:
+                expected_answer.extend(["", ""])
+                got_answer.extend(["", ""])
             print(f"{FAIL}TEST {i+1} FAILED{ENDC}")
-            print(f"{WARNING}\t- EXPECTED: {BOLD}{UNDERLINE}{expected_answer}{ENDC}")
-            print(f"{FAIL}\t- GOT: {BOLD}{UNDERLINE}{got_answer}{ENDC}")
+            print(f"{WARNING}\t- EXPECTED: {BOLD}{UNDERLINE}{expected_answer[0:3]}{ENDC}")
+            print(f"{FAIL}\t- GOT: {BOLD}{UNDERLINE}{got_answer[0:3]}{ENDC}")
 
     print(f"{OKCYAN}{BOLD}PASSED {OKGREEN}{passed_tests_count}{ENDC} {OKCYAN}{BOLD}TESTS OUT OF {WARNING}{NUM_OF_TESTS}{ENDC}")
     print(f"\t{OKCYAN} SCORE OF {input_code_filename} {WARNING}->{OKBLUE} {round(passed_tests_count*100/NUM_OF_TESTS, 2)}%")

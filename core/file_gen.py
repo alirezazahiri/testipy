@@ -26,7 +26,7 @@ def create_files(count: int, extension: str):
             if content.strip() == "":
                 print(f"{FAIL}SAMPLE IS EMPTY...{ENDC}")
                 print(f"{FAIL}EXITING...{ENDC}")
-                exit()
+                exit(0)
             io_list.append((content, result))
         else:
             content, result = io_list[i]
